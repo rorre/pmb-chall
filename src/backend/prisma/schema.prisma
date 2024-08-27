@@ -1,0 +1,29 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  username String @id
+  password String
+  name     String
+
+  whatsapp  String?
+  instagram String?
+  line      String?
+}
+
+model Matches {
+  firstUsername  String
+  secondUsername String
+  mutual         Boolean @default(false)
+
+  @@id([firstUsername, secondUsername])
+}
